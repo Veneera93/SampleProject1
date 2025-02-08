@@ -2,7 +2,7 @@ package org.example.practical.libraryManagementSystem;
 
 public class Book extends ItemType {
     public Book(String title, String author, String serialNumber) {
-        super(title, author, serialNumber);
+        super(title, author, serialNumber);//call parent class constructor
     }
 
     @Override

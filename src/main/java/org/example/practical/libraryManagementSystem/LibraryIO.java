@@ -110,7 +110,14 @@ public class LibraryIO {
         }
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            return (Map<String, String>) ois.readObject();
+            Object readObject = ois.readObject();
+            // Check if the deserialized object is indeed a Map
+            if (readObject instanceof Map) {
+                return (Map<String, String>) readObject;
+            } else {
+                System.out.println("Data format mismatch: expected a Map but found " + readObject.getClass());
+                return new HashMap<>();
+            }
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }

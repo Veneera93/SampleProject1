@@ -11,7 +11,8 @@ public class Library {
     public void addItem(ItemType libraryItem) {
         libraryItems.add(libraryItem);
     }
-    public void addItemList(List<ItemType> libraryItemList){
+
+    public void addItemList(List<ItemType> libraryItemList) {
         this.libraryItems.addAll(libraryItemList);
     }
 
@@ -23,13 +24,15 @@ public class Library {
         users.add(user);
     }
 
-    public void addUserList(List<User> userList){
+    public void addUserList(List<User> userList) {
         this.users.addAll(userList);
     }
+
     public List<User> getUsers() {
         return users;
     }
-    public Map<String, String> getBorrowedItems(){
+
+    public Map<String, String> getBorrowedItems() {
         return borrowedItem;
     }
 
@@ -51,7 +54,7 @@ public class Library {
         }
 
         if (isItemAlreadyBorrowed(serialNumber)) {
-            System.out.println("Item with serial number is already borrowed");
+            System.out.println("Item with serial number "+serialNumber+" is already borrowed");
             return;
         }
 
@@ -64,7 +67,7 @@ public class Library {
         System.out.println(username + " is successfully borrow the item:" + serialNumber);
     }
 
-    public void addBorrowedItems(Map<String, String> borrowedItems){
+    public void addBorrowedItems(Map<String, String> borrowedItems) {
         this.borrowedItem.putAll(borrowedItems);
     }
 
@@ -83,8 +86,13 @@ public class Library {
 //}
 
     public void returnBorrowedItem(String serialNumber) {
-        String username = borrowedItem.remove(serialNumber);
-        System.out.println(serialNumber+" book is returned by"+username);
+
+        if (borrowedItem.containsKey(serialNumber)) {
+            String username = borrowedItem.remove(serialNumber);
+            System.out.println(serialNumber + " book is returned by" + username);
+        } else {
+            System.out.println(serialNumber + " is not exist in borrowed list or not valid number.");
+        }
     }
 
     /**
